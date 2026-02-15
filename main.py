@@ -306,7 +306,10 @@ def llenar_pdf(template_path: str, datos: Dict[str, str], output_path: str) -> d
         
         # Rellenar
         pdf.fill(datos_filtrados)
-        pdf.save(output_path)
+
+        # CAMBIO AQUÍ:
+        with open(output_path, "wb+") as output:
+            output.write(pdf.read())
         
         # Información de llenado
         campos_llenados = len(datos_filtrados)
