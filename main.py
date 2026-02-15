@@ -190,10 +190,10 @@ MAPEOS_INSTITUCIONES = {
         "fecha_firma": lambda c: datetime.now().strftime("%d/%m/%Y"),
     },
     
-    # SEGUROS GENÉRICO - PERSONA NATURAL
+# SEGUROS GENÉRICO - PERSONA NATURAL
     "seguros_generico": {
-        "apellido_1": lambda c: c.nombre_completo.split()[-2] if len(c.nombre_completo.split()) > 1 else "",
-        "apellido_2": lambda c: c.nombre_completo.split()[-1] if len(c.nombre_completo.split()) > 2 else "",
+        "apellido_1": lambda c: c.nombre_completo.split()[-2] if len(c.nombre_completo.split()) > 1 else c.nombre_completo.split()[0] if c.nombre_completo else "",
+        "apellido_2": lambda c: c.nombre_completo.split()[-1] if len(c.nombre_completo.split()) > 1 else "",
         "nombre_1": lambda c: c.nombre_completo.split()[0] if c.nombre_completo else "",
         "nombre_2": lambda c: c.nombre_completo.split()[1] if len(c.nombre_completo.split()) > 2 else "",
         "fecha_nacimiento": lambda c: c.fecha_nacimiento,
@@ -238,7 +238,7 @@ MAPEOS_INSTITUCIONES = {
         "actividad_independiente": lambda c: c.ocupacion if c.empresa and "independiente" in c.empresa.lower() else "",
         "nombre_firmante": lambda c: c.nombre_completo,
         "firma_fecha": lambda c: datetime.now().strftime("%d/%m/%Y"),
-    }
+    },
 }
 
 # Templates por defecto
