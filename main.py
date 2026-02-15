@@ -52,33 +52,35 @@ class FormularioRequest(BaseModel):
 MAPEOS_INSTITUCIONES = {
     # MORGAN & MORGAN - PERSONA NATURAL
     "morgan_morgan_natural": {
-        "nombre_completo": lambda c: c.nombre_completo,
-        "nacionalidad_origen": lambda c: c.nacionalidad,
-        "otras_nacionalidades": lambda c: "",  # Dejar vacío por ahora
-        "telefono": lambda c: c.telefono,
-        "email": lambda c: c.email,
-        "direccion_fisica": lambda c: c.direccion_completa,
-        "ocupacion_actividad": lambda c: c.ocupacion,
-        "pais_ocupacion": lambda c: "Panamá",  # Por defecto
-        "requiere_licencia": lambda c: "NO",  # Checkbox
-        "numero_ruc": lambda c: c.ruc if c.ruc else "",
-        "dv": lambda c: "",  # Dígito verificador
-        "numero_tributario": lambda c: c.nit if c.nit else "",
-        "pais_residencia_fiscal": lambda c: "Panamá",  # Por defecto
-        "origen_riqueza_salarios": lambda c: "X" if "salario" in c.origen_fondos.lower() else "",
-        "origen_riqueza_pensiones": lambda c: "X" if "pension" in c.origen_fondos.lower() else "",
-        "origen_riqueza_renta": lambda c: "X" if "alquiler" in c.origen_fondos.lower() or "renta" in c.origen_fondos.lower() else "",
-        "origen_riqueza_dividendos": lambda c: "X" if "dividendo" in c.origen_fondos.lower() else "",
-        "origen_riqueza_herencia": lambda c: "X" if "herencia" in c.origen_fondos.lower() else "",
-        "origen_riqueza_otro": lambda c: "X" if c.origen_fondos and c.origen_fondos.lower() not in ["salario", "pension", "alquiler", "renta", "dividendo", "herencia"] else "",
-        "pais_origen_riqueza": lambda c: "Panamá",  # Por defecto
-        "referencia_banco_nombre": lambda c: "",  # Referencias dejadas vacías
-        "referencia_banco_contacto": lambda c: "",
-        "referencia_banco_telefono": lambda c: "",
-        "referencia_banco_email": lambda c: "",
-        "nombre_declarante": lambda c: c.nombre_completo,
-        "cedula_declarante": lambda c: c.cedula,
-        "fecha_declaracion": lambda c: datetime.now().strftime("%d/%m/%Y"),
+        "Text1": lambda c: c.nombre_completo,
+        "Text2": lambda c: c.nacionalidad,
+        "Text3": lambda c: "",  # Otras nacionalidades - tabla vacía
+        "Text4": lambda c: c.telefono,
+        "Text5": lambda c: c.email,
+        "Text6": lambda c: c.direccion_completa,
+        "Text7": lambda c: c.ocupacion,
+        "Text8": lambda c: "Panamá",  # País donde lleva a cabo ocupación
+        "Check Box9": lambda c: "",  # Requiere licencia: SÍ
+        "Check Box10": lambda c: "Yes",  # Requiere licencia: NO
+        "Text11": lambda c: c.ruc.split('-')[0] if c.ruc and '-' in c.ruc else c.ruc if c.ruc else "",  # No. RUC
+        "Text12": lambda c: c.ruc.split('-')[1] if c.ruc and '-' in c.ruc else "",  # D.V.
+        "Text13": lambda c: c.nit if c.nit else "",  # Número tributario
+        "Text14": lambda c: "Panamá",  # País residencia fiscal
+        "Check Box15": lambda c: "Yes" if "salario" in c.origen_fondos.lower() else "",  # Salarios
+        "Check Box16": lambda c: "Yes" if "pension" in c.origen_fondos.lower() else "",  # Pensiones
+        "Check Box17": lambda c: "Yes" if "alquiler" in c.origen_fondos.lower() or "renta" in c.origen_fondos.lower() else "",  # Renta
+        "Check Box18": lambda c: "Yes" if "dividendo" in c.origen_fondos.lower() else "",  # Dividendos
+        "Check Box19": lambda c: "Yes" if "herencia" in c.origen_fondos.lower() else "",  # Herencia
+        "Check Box20": lambda c: "Yes" if c.origen_fondos and c.origen_fondos.lower() not in ["salario", "pension", "alquiler", "renta", "dividendo", "herencia", "negocio propio"] else "",  # Otro
+        "Text21": lambda c: c.origen_fondos if c.origen_fondos and c.origen_fondos.lower() not in ["salario", "pension", "alquiler", "renta", "dividendo", "herencia", "negocio propio"] else "",  # Detalle otro
+        "Text22": lambda c: "Panamá",  # País origen riqueza
+        "Text23": lambda c: "",  # Referencia comercial - nombre
+        "Text24": lambda c: "",  # Referencia comercial - teléfono
+        "Text25": lambda c: "",  # Referencia bancaria - nombre
+        "Text26": lambda c: "",  # Referencia bancaria - email
+        "Text27": lambda c: c.nombre_completo,  # Nombre declarante
+        "Text28": lambda c: c.cedula,  # Número documento
+        "Text29": lambda c: datetime.now().strftime("%d/%m/%Y"),  # Fecha
     },
     
     # MORGAN & MORGAN - PERSONA JURÍDICA
